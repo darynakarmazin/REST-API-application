@@ -9,19 +9,12 @@ const Jimp = require("jimp");
 
 const updateAvatar = async (req, res, next) => {
   const { path: tempUpload, originalname } = req.file;
-
-  console.log(tempUpload);
-
-  Jimp.read(tempUpload)
-    .then((image) => {
-      return image.resize(250, 250).write(tempUpload);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-
   const { _id: id } = req.user;
   const imageName = `${id}_${originalname}`;
+
+  const img = await Jimp.read(tempUpload);
+  await img.cover(250, 250).writeAsync(tempUpload);
+
   try {
     const resultUpload = path.join(avatarsDir, imageName);
     await fs.rename(tempUpload, resultUpload);
