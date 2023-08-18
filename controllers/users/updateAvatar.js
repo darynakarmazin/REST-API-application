@@ -5,8 +5,21 @@ const fs = require("fs/promises");
 
 const avatarsDir = path.join(__dirname, "../../", "public", "avatars");
 
+const Jimp = require("jimp");
+
 const updateAvatar = async (req, res, next) => {
   const { path: tempUpload, originalname } = req.file;
+
+  console.log(tempUpload);
+
+  Jimp.read(tempUpload)
+    .then((image) => {
+      return image.resize(250, 250).write(tempUpload);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
   const { _id: id } = req.user;
   const imageName = `${id}_${originalname}`;
   try {
