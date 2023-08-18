@@ -15,6 +15,7 @@ const updateAvatar = async (req, res, next) => {
     res.status(200).json({
       status: "OK",
       code: 200,
+      data: {
         avatarURL,
       },
     });
