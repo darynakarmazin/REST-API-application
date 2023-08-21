@@ -15,16 +15,4 @@ const sendEmail = async (data) => {
   }
 };
 
-// const mail = {
-//   to: "sergeieva.darina@gmail.com",
-//   from: "darinakarmazintest@ukr.net",
-//   subject: "New application",
-//   html: "<p>New application!!!</p>",
-// };
-
-// sgMail
-//   .send(mail)
-//   .then(() => console.log("Succsess"))
-//   .catch((error) => console.log(error.message));
-
 module.exports = sendEmail;
