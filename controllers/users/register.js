@@ -8,6 +8,10 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
 
+const dotenv = require("dotenv");
+dotenv.config();
+const { BASE_URL } = process.env;
+
 const register = async (req, res, next) => {
   try {
     const { error } = userSchema.validate(req.body);
@@ -42,10 +46,11 @@ const register = async (req, res, next) => {
     const mail = {
       to: email,
       subject: "Please Verify Your Identity",
-      html: `<a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Verify Your Identity</a>`,
+      html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Verify Your Identity</a>`,
     };
 
     await sendEmail(mail);
+
     res.status(201).json({
       status: "Created",
       code: 201,
