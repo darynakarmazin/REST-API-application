@@ -18,4 +18,6 @@ router.patch("/", auth, ctrl.updateSubscriptionUser);
 
 router.get("/verify/:verificationToken", ctrl.verifyEmail);
 
+router.post("/verify", ctrl.resendVerifyEmail);
+
 module.exports = router;
